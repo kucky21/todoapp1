@@ -1,0 +1,50 @@
+{% extends "base.html.twig" %}
+{% block body %}
+	<header class="jumbotron jumbotron-fluid text-white headercolor mb-0 border-bottom p-4 text-center txt">
+		<div class="container text-center txtheader">
+			<div>
+				<h1 class="display-4 text-center">To Do List</h1>
+				<p class="lead ">Do it online</p>
+			</div>
+		</div>
+				{% if app.user %}
+					<p>Hi
+						{{app.user.username}}</p>
+				{% endif %}
+
+	</header>
+
+	<nav
+		class="navbar navbar-expand-lg navbar-light text-secondary p-2 container bodycolor">
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<a class="btn btn-danger rounded-pill p-2 text-white mx-2" href="{{path('app_logout')}}">Logout</a>
+		{% else %}
+			<a href="{{path('app_login')}}" class="btn btn-danger rounded-pill p-2 text-white mx-2">Login</a>
+		{% endif %}
+		<div class="justify-content-between" id="navbarNav">
+			<a class="btn btn-warning p-2 text-dark" href="{{ path("main") }}">Home</a>
+		</div>
+		<div>
+			<a class="btn btn-lg bg-success m-2 p-1" href="{{ path('user_index') }}">User</a>
+			<a class="btn btn-lg bg-success m-2 p-1" href="{{ path('project_index') }}">Projects</a>
+			<a class="btn btn-lg bg-success m-2 p-1" href="{{ path('task_index') }}">Tasks</a>
+		</div>
+
+		<div>
+			<a class="btn btn-lg bg-warning m-2 p-1" href="{{ path('user_new') }}">cREATE NEW USER</a>
+			<a class="btn btn-lg bg-warning m-2 p-1" href="{{ path('project_new') }}">New project</a>
+			<a class="btn btn-lg bg-warning m-2 p-1" href="{{ path('task_new') }}">New task</a>
+		</div>
+	</nav>
+
+	<main class="container bodycolor txt">
+		{% block main %}{% endblock %}
+	</main>
+	<footer class=" pt-4 pt-md-5 border-top headercolor text-white txtheader">
+		<div class="row">
+			<div class="col-12 col-md">
+				<p class="d-block text-center">&copy; To Do List 2022</p>
+			</div>
+		</div>
+	</footer>
+{% endblock %}
